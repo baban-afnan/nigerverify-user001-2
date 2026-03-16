@@ -37,7 +37,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/palmpay/webhook', [PaymentWebhookController::class, 'handlePalmPay']);
+Route::post('/monnify/webhook', [PaymentWebhookController::class, 'handleWebhook']);
 Route::post('/update-bvn-enrollment-status', [EnrollmentSyncController::class, 'updateStatus']);
 
 // =========================================================================
