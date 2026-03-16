@@ -71,12 +71,6 @@
                                                         <td>{{ ($transactions->currentPage() - 1) * $transactions->perPage() + $loop->iteration }}
                                                         </td>
                                                         <td>{{ $data->created_at->format('d M Y') }}</td>
-                                                        <td>
-                                                            <a target="_blank"
-                                                                href="{{ route('admin.receipt', $data->referenceId) }}">
-                                                                {{ strtoupper($data->referenceId) }}
-                                                            </a>
-                                                        </td>
                                                         <td>{{ $data->service_type }}</td>
                                                         <td>{{ $data->service_description }}</td>
                                                         <td>&#8358;{{ number_format($data->amount, 2) }}</td>
