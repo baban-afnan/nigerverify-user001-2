@@ -131,9 +131,13 @@
                                                 <div class="text-muted smallest">{{ $data->created_at->format('h:i A') }}</div>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.receipt', $data->referenceId) }}" class="text-primary fw-semibold text-decoration-none">
-                                                    {{ $data->referenceId }}
-                                                </a>
+                                                @if($data->referenceId)
+                                                    <a href="{{ route('admin.receipt', $data->referenceId) }}" class="text-primary fw-semibold text-decoration-none">
+                                                        {{ $data->referenceId }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-muted small">N/A</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <div class="fw-medium text-dark">{{ $data->service_type }}</div>
@@ -160,9 +164,15 @@
                                                 </span>
                                             </td>
                                             <td class="text-end pe-4">
-                                                <a href="{{ route('admin.receipt', $data->referenceId) }}" class="btn btn-sm btn-outline-primary rounded-pill">
-                                                    <i class="bi bi-download me-1"></i> Receipt
-                                                </a>
+                                                @if($data->referenceId)
+                                                    <a href="{{ route('admin.receipt', $data->referenceId) }}" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                        <i class="bi bi-download me-1"></i> Receipt
+                                                    </a>
+                                                @else
+                                                    <button class="btn btn-sm btn-light rounded-pill disabled" title="Reference ID missing">
+                                                        <i class="bi bi-slash-circle me-1"></i> No Receipt
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
