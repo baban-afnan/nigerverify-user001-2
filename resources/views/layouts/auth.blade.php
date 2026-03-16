@@ -22,19 +22,12 @@
 </head>
 
 <body>
-    <div class="page-loading " id="loader">
+    <div class="page-loading" id="loader">
         <div class="page-loading-inner">
-
-           <div class="loader-demo-box mb-5" style="height:0px; border:0px !important;">
-                        <div class="circle-loader"></div>
-                      </div>
-
-            <h6 class="loader-text">
-                {{ $settings->short_name ?? 'Naija Verify' }}
-            </h6>
-
+            <div class="loader-demo-box mb-5" style="height:0px; border:0px !important;">
+                <div class="circle-loader"></div>
+            </div>
         </div>
-
     </div>
 
     <div class="container-scroller">

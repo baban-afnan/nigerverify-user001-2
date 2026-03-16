@@ -60,7 +60,7 @@
     <header class="header">
         <div class="logo-container">
             <img src="{{ asset('assets/images/logo.png') }}" alt="" class="logo"/>
-            <h1>USSEY TECH</h1>
+            <h1>Naija Verify</h1>
         </div>
         <nav>
             <ul class="nav">
