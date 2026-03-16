@@ -473,81 +473,59 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="kycModal" tabindex="-1" aria-labelledby="kycModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal fade" id="kycModal" tabindex="-1" aria-labelledby="kycModal" data-bs-keyboard="true"
+                data-bs-backdrop="static" data-bs-keyboard="false">
+
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="staticBackdropLabel2">Verify Account</h6>
+                            <h6 class="modal-title" id="staticBackdropLabel2">Verify Account
+                            </h6>
                         </div>
-
                         <div class="modal-body">
-                            We're excited to have you on board! To activate your account and create your virtual account, please provide the information below.
+                            We're excited to have you on board! However, we need to verify your identity before activating
+                            your
+                            account. provide your Identification number below.
                         </div>
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
-                                <ul class="mb-0">
+                                <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
                         @endif
-
                         @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ session('error') }}
                             </div>
                         @endif
-
-                        <div class="px-4 pb-4">
-                            <form id="verify" name="verifyForm" method="POST" action="{{ route('user.kyc.submit') }}">
-                                @csrf
-
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <label for="first_name" class="form-label small">First Name</label>
-                                        <input type="text" id="first_name" name="first_name" class="form-control" value="{{ old('first_name', auth()->user()->first_name ?? '') }}" required />
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="col-md-6 col-lg-6">
+                                <form id="verify" name="verifyForm" method="POST"
+                                    action="{{ route('user.verify-user') }}">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <p class="mb-2 text-muted text-center">Enter your BVN No.</p>
+                                        <input type="text" id="bvn" name="bvn"
+                                            class="form-control text-center" maxlength="11" required />
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <label for="last_name" class="form-label small">Last Name</label>
-                                        <input type="text" id="last_name" name="last_name" class="form-control" value="{{ old('last_name', auth()->user()->last_name ?? '') }}" required />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label small">Phone Number</label>
-                                        <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone', auth()->user()->phone_number ?? '') }}" maxlength="15" required />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label small">Email</label>
-                                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', auth()->user()->email ?? '') }}" required />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="bvn" class="form-label small">BVN</label>
-                                        <input type="text" id="bvn" name="bvn" class="form-control text-center" maxlength="11" value="{{ old('bvn', auth()->user()->bvn ?? '') }}" required />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="dob" class="form-label small">Date of Birth</label>
-                                        <input type="date" id="dob" name="dob" class="form-control" value="{{ old('dob', auth()->user()->dob ?? '') }}" required />
-                                    </div>
-                                </div>
-
-                                <div class="text-center mt-3 d-flex justify-content-center gap-2">
-                                    <button type="submit" id="submit" class="btn btn-primary">
-                                        <i class="lar la-check-circle"></i> Compile & Create Account
-                                    </button>
-                            </form>
-                                    <form method="POST" action="{{ route('logout') }}" class="m-0">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="las la-sign-out-alt"></i> Logout
+                                    <div class="text-center mb-3 d-flex justify-content-center gap-2">
+                                        <button type="submit" id="submit" class="btn btn-primary">
+                                            <i class="lar la-check-circle"></i> Verify Now
                                         </button>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
+
+                                <form method="POST" action="{{ route('logout') }}" class="text-center mb-3">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="las la-sign-out-alt"></i> Logout
+                                    </button>
+                                </form>
+                            </div>
                         </div>
 
                     </div>

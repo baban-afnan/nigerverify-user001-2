@@ -63,4 +63,33 @@ class DashboardController extends Controller
             return redirect()->back()->with('error', 'An error occurred during KYC submission. Please try again.');
         }
     }
+
+    public function verifyUser(Request $request)
+    {
+        $request->validate([
+            'bvn' => 'required|string|size:11',
+        ]);
+
+        $user = auth()->user();
+
+        try {
+            // Save BVN on the user record
+            $user->update(['bvn' => $request->bvn]);
+
+            // Create Virtual Account using the submitted BVN
+            $virtualAccountRepo = new VirtualAccountRepository();
+            $result = $virtualAccountRepo->createVirtualAccount($user->id, $request->bvn);
+
+            if ($result['success']) {
+                $user->update(['kyc_status' => 'Verified']);
+                return redirect()->route('user.dashboard')->with('success', 'Account verified and Virtual Account created successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Failed to create virtual account: ' . $result['message']);
+            }
+
+        } catch (\Exception $e) {
+            Log::error('Verify User Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred. Please try again.');
+        }
+    }
 }

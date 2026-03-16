@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
 use Exception;
 use App\Models\User;
@@ -23,7 +23,7 @@ class VirtualAccountRepository
         $this->baseUrl = config('monnify.credentials.monnify_base_url');
     }
 
-    public function createVirtualAccount($loginUserId)
+    public function createVirtualAccount($loginUserId, $bvn = null)
     {
         $accessToken =  $this->getAccessToken();
 
@@ -50,7 +50,7 @@ class VirtualAccountRepository
                     "contractCode"         => $this->contractCode,
                     "customerEmail"        => $userDetails->email,
                     "customerName"         => $userDetails->name,
-                    "bvn"                  => '22471425162',
+                    "bvn"                  => $bvn ?? $userDetails->bvn,
                     "getAllAvailableBanks" => false,
                     "preferredBanks"       => [$bankCode1, $bankCode2, $bankCode3],
                 ];
@@ -91,7 +91,7 @@ class VirtualAccountRepository
 
                 // Proceed only if the request was successful
                 if (! $retrieveData['requestSuccessful']) {
-                    throw new Exception('Request was not successful.');
+                    throw new Exception('You cannot reserve more than 1 account(s) for a customer. Please contact support for assistance.');
                 }
 
                 $responseBody = $retrieveData['responseBody'];
@@ -124,13 +124,15 @@ class VirtualAccountRepository
 
                 // Update user to indicate virtual account creation
                 User::where('id', $loginUserId)->update(['vwallet_is_created' => 1]);
-                return true;
+                return ['success' => true, 'message' => 'Virtual account created successfully.'];
             } catch (\Exception $e) {
                 Log::error('Error creating virtual account for user ' . $loginUserId . ': ' . $e->getMessage());
 
-                return response()->json(['error' => 'Failed to create virtual account.'], 500);
+                return ['success' => false, 'message' => $e->getMessage()];
             }
         }
+
+        return ['success' => false, 'message' => 'Virtual account already exists for this user.'];
     }
 
     public function getAccessToken()

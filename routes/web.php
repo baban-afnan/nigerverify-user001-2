@@ -67,6 +67,7 @@ Route::middleware(['auth', 'user.active'])->group(function () {
         // --- Core Dashboard & Wallet ---
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/kyc-submit', [DashboardController::class, 'submitKyc'])->name('kyc.submit');
+        Route::post('/verify-user', [DashboardController::class, 'verifyUser'])->name('verify-user');
         Route::get('/wallet', [WalletController::class, 'index'])->name('wallet');
         Route::get('claim-bonus/{id}', [WalletController::class, 'claimBonus'])->name('claim-bonus');
         Route::get('/receipt/{referenceId}', [TransactionController::class, 'reciept'])->name('reciept');
