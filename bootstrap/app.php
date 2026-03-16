@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Middleware\IsActive;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsKyced;
@@ -26,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->validateCsrfTokens(except: [
             '/palmpay/webhook',
+            '/monnify/webhook',
             '/update-bvn-enrollment-status',
         ]);
     })

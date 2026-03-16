@@ -145,7 +145,7 @@
 
 
             <h6 class="loader-text">
-                {{ $settings->short_name ?? config('app.name') }}
+                {{ $settings->short_name ?? 'Naija Verify' }}
             </h6>
 
         </div>
