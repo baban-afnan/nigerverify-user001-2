@@ -34,10 +34,8 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
-    'arewa' => [
-        'base_url' => env('AREWA_BASE_URL', 'https://api.arewa.com.ng'), // Default if env missing
-        'token' => env('AREWA_API_TOKEN'),
+    'bank_data' => [
+        'url' => env('BANK_URL', env('APP_URL') . '/api/v1/bvn-modifications/services'),
     ],
 
 ];
