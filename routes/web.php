@@ -70,7 +70,7 @@ Route::middleware(['auth', 'user.active'])->group(function () {
         Route::post('/verify-user', [DashboardController::class, 'verifyUser'])->name('verify-user');
         Route::get('/wallet', [WalletController::class, 'index'])->name('wallet');
         Route::get('claim-bonus/{id}', [WalletController::class, 'claimBonus'])->name('claim-bonus');
-        Route::get('/receipt/{referenceId}', [TransactionController::class, 'reciept'])->name('reciept');
+        Route::get('/receipt/{referenceId}', [TransactionController::class, 'receipt'])->name('receipt');
 
         // --- Utility Bill Payments ---
         Route::group([], function () {
@@ -230,7 +230,7 @@ Route::middleware(['auth', 'user.active'])->group(function () {
 // =========================================================================
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'user.active', 'user.admin']], function () {
 
-    Route::get('/receipt/{referenceId}', [TransactionController::class, 'recieptAdmin'])->name('receipt');
+    Route::get('/receipt/{referenceId}', [TransactionController::class, 'receiptAdmin'])->name('receipt');
     Route::get('/transactions', [TransactionController::class, 'transactions'])->name('transactions');
 
     // User Management

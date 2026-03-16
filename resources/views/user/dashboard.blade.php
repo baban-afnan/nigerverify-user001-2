@@ -423,7 +423,7 @@
                                             <td>
                                                 @if($data->referenceId)
                                                 <a target="_blank"
-                                                    href="{{ route('user.reciept', $data->referenceId) }}">
+                                                    href="{{ route('user.receipt', $data->referenceId) }}">
                                                     {{ strtoupper($data->referenceId) }}
                                                 </a>
                                                 @else
@@ -442,7 +442,7 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($data->referenceId)
-                                                <a target="_blank" href="{{ route('user.reciept', $data->referenceId) }}"
+                                                <a target="_blank" href="{{ route('user.receipt', $data->referenceId) }}"
                                                     class="btn btn-outline-primary btn-sm">
                                                     <i class="bi bi-download"></i> Download
                                                 </a>

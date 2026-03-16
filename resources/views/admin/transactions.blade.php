@@ -74,7 +74,7 @@
                                                         <td>{{ $data->created_at->format('d M Y') }}</td>
                                                         <td>
                                                             <a target="_blank"
-                                                                href="{{ route('admin.reciept', $data->referenceId) }}">
+                                                                href="{{ route('admin.receipt', $data->referenceId) }}">
                                                                 {{ strtoupper($data->referenceId) }}
                                                             </a>
                                                         </td>
@@ -93,7 +93,7 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <a target="_blank"
-                                                                href="{{ route('admin.reciept', $data->referenceId) }}"
+                                                                href="{{ route('admin.receipt', $data->referenceId) }}"
                                                                 class="btn btn-primary btn-sm">
                                                                 <i class="bi bi-download"></i> Download
                                                             </a>

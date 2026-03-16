@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public function reciept(Request $request)
+    public function receipt(Request $request)
     {
 
         $loginUserId = Auth::id();
@@ -23,7 +23,7 @@ class TransactionController extends Controller
 
         return view('user.receipt', ['transaction' => $transaction]);
     }
-    public function recieptAdmin(Request $request)
+    public function receiptAdmin(Request $request)
     {
 
         $transaction = Transaction::where('referenceId', $request->referenceId)->first();
