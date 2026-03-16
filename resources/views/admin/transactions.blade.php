@@ -63,7 +63,6 @@
                                                     <th>Payer Email</th>
                                                     <th>Payer Phone</th>
                                                     <th class="text-center">Status</th>
-                                                    <th class="text-center">Receipt</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -90,14 +89,6 @@
                                                                 {{ $data->status == 'Approved' ? 'btn-success' : ($data->status == 'Rejected' ? 'btn-danger' : 'btn-warning') }}">
                                                                 {{ strtoupper($data->status) }}
                                                             </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a target="_blank"
-                                                                href="{{ route('admin.receipt', $data->referenceId) }}"
-                                                                class="btn btn-primary btn-sm">
-                                                                <i class="bi bi-download"></i> Download
-                                                            </a>
-                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
