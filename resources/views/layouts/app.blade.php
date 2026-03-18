@@ -11,7 +11,7 @@
     <meta name="keywords"
         content="identy - Your #1 for identity verification and BVN-related services, cable TV subscriptions (DSTV, GOTV, & STARTIMES), electricity bill payments, recharge card, and data printing.">
     <!-- SITE TITLE -->
-     <title>@yield('title', $settings->site_name ?? config('app.name'))</title>
+     <title>Naija Verify</title>
     <!-- Latest Bootstrap min CSS -->
     <link rel="stylesheet" href="{{ asset('assets/index/bootstrap/css/bootstrap.min.css') }}">
     <!-- Bootstrap Icons -->

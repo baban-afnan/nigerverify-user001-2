@@ -63,6 +63,10 @@
                                     required value="{{ old('number_nin') }}">
                             </div>
                             <small class="text-muted mt-2 d-block text-center italic">Verify identity records from the national database.</small>
+                            <div class="alert alert-warning border-0 small py-2 mt-3 mb-0 rounded-3 text-center">
+                                <i class="mdi mdi-alert-circle me-1"></i> 
+                                <strong>Note:</strong> You will be charged even if the NIN record is not found.
+                            </div>
                         </div>
 
                         <div class="card bg-light border-0 mb-4 rounded-3">
