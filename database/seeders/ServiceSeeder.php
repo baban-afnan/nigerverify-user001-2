@@ -81,64 +81,91 @@ class ServiceSeeder extends Seeder
         ]);
 
         // AIRTIME
-        ServiceManager::getServiceWithFields('AIRTIME', [
-            ['name' => 'Airtime', 'code' => '001', 'price' => 0],
+        ServiceManager::getServiceWithFields('Airtime', [
             ['name' => 'MTN', 'code' => '101', 'price' => 0],
             ['name' => 'Airtel', 'code' => '100', 'price' => 0],
             ['name' => 'Glo', 'code' => '102', 'price' => 0],
-            ['name' => 'Etisalat', 'code' => '103', 'price' => 0],
+            ['name' => '9mobile', 'code' => '103', 'price' => 0],
         ]);
 
-          // tin registration
+        // DATA
+        ServiceManager::getServiceWithFields('Data', [
+            ['name' => 'MTN Data', 'code' => 'mtn-data', 'price' => 0],
+            ['name' => 'Airtel Data', 'code' => 'airtel-data', 'price' => 0],
+            ['name' => 'Glo Data', 'code' => 'glo-data', 'price' => 0],
+            ['name' => '9mobile Data', 'code' => 'etisalat-data', 'price' => 0],
+            ['name' => 'Smile Direct', 'code' => 'smile-direct', 'price' => 0],
+            ['name' => 'Spectranet', 'code' => 'spectranet', 'price' => 0],
+        ]);
+
+        // SME DATA
+        ServiceManager::getServiceWithFields('SME Data', [
+            ['name' => 'MTN SME Data', 'code' => 'mtn', 'price' => 0],
+            ['name' => 'Airtel SME Data', 'code' => 'airtel', 'price' => 0],
+            ['name' => 'Glo SME Data', 'code' => 'glo', 'price' => 0],
+            ['name' => '9mobile SME Data', 'code' => '9mobile', 'price' => 0],
+        ]);
+
+        // EDUCATIONAL
+        ServiceManager::getServiceWithFields('Educational', [
+            ['name' => 'WAEC Result Checker', 'code' => 'waec', 'price' => 0],
+            ['name' => 'WAEC Registration', 'code' => 'waec-registration', 'price' => 0],
+            ['name' => 'JAMB PIN', 'code' => 'jamb', 'price' => 0],
+            ['name' => 'NECO Result Checker', 'code' => 'neco', 'price' => 0],
+        ]);
+
+        // CABLE TV
+        ServiceManager::getServiceWithFields('Cable', [
+            ['name' => 'DSTV Subscription', 'code' => 'dstv', 'price' => 0],
+            ['name' => 'GOTV Subscription', 'code' => 'gotv', 'price' => 0],
+            ['name' => 'Startimes Subscription', 'code' => 'startimes', 'price' => 0],
+        ]);
+
+        // TIN REGISTRATION
         ServiceManager::getServiceWithFields('TIN REGISTRATION', [
             ['name' => 'Individual', 'code' => '800', 'price' => 100],
             ['name' => 'Corporate', 'code' => '801', 'price' => 100],
         ]);
 
-         // Phone number search Using bvn 
+        // BVN SEARCH
         ServiceManager::getServiceWithFields('BVN SEARCH', [
             ['name' => 'Search BVN', 'code' => '45', 'price' => 1500],
         ]);
 
-         // IPE search Using bvn 
+        // IPE
         ServiceManager::getServiceWithFields('IPE', [
             ['name' => 'IPE', 'code' => '100', 'price' => 800],
         ]);
 
+        // CRM  
+        ServiceManager::getServiceWithFields('CRM', [
+            ['name' => 'Central Risk Management', 'code' => '021', 'price' => 1500],
+        ]);
 
-            // CRM  
-            ServiceManager::getServiceWithFields('CRM', [
-                ['name' => 'Central Risk Management', 'code' => '021', 'price' => 1500],
-            ]);
+        // Affidavit
+        ServiceManager::getServiceWithFields('Affidavit', [
+            ['name' => 'Affidavit', 'code' => '900', 'price' => 500],
+        ]);
 
-            // General Services (used for Affidavit, etc.)
-            ServiceManager::getServiceWithFields('Affidavit', [
-                ['name' => 'Affidavit', 'code' => '900', 'price' => 500],
-            ]);
+        // NIN Modification
+        ServiceManager::getServiceWithFields('NIN Modification', [
+            ['name' => 'Correction of name', 'code' => '032', 'price' => 8000],
+            ['name' => 'Phone Number Update', 'code' => '033', 'price' => 8000],
+            ['name' => 'Gender Update', 'code' => '034', 'price' => 20000],
+            ['name' => 'Date of birth update below 5 year', 'code' => '035', 'price' => 45000],
+            ['name' => 'Date of birth Update above 5 year', 'code' => '036', 'price' => 60000],
+            ['name' => 'Change of Residence Address', 'code' => '037', 'price' => 8000],
+        ]);
 
-
-             // NIN Modification
-            ServiceManager::getServiceWithFields('NIN Modification', [
-                ['name' => 'Correction of name', 'code' => '032', 'price' => 8000],
-                ['name' => 'Phone Number Update', 'code' => '033', 'price' => 8000],
-                ['name' => 'Gender Update', 'code' => '034', 'price' => 20000],
-                ['name' => 'Date of birth update below 5 year', 'code' => '035', 'price' => 45000],
-                ['name' => 'Date of birth Update above 5 year', 'code' => '036', 'price' => 60000],
-                ['name' => 'Change of Residence Address', 'code' => '037', 'price' => 8000],
-            ]);
-
-
-             // General Services (used for validation, etc.)
-            ServiceManager::getServiceWithFields('Validation', [
-                ['name' => 'No record found', 'code' => '015', 'price' => 1000],
-                ['name' => 'Photographic Error', 'code' => '016', 'price' => 1000],
-                ['name' => 'NIN Suspension', 'code' => '017', 'price' => 2500],
-                ['name' => 'Record update', 'code' => '018', 'price' => 1000],
-                ['name' => 'Modification Validation', 'code' => '019', 'price' => 1200],
-                ['name' => 'NIN Migration', 'code' => '020', 'price' => 3000],
-            ]);
-
-
+        // Validation
+        ServiceManager::getServiceWithFields('Validation', [
+            ['name' => 'No record found', 'code' => '015', 'price' => 1000],
+            ['name' => 'Photographic Error', 'code' => '016', 'price' => 1000],
+            ['name' => 'NIN Suspension', 'code' => '017', 'price' => 2500],
+            ['name' => 'Record update', 'code' => '018', 'price' => 1000],
+            ['name' => 'Modification Validation', 'code' => '019', 'price' => 1200],
+            ['name' => 'NIN Migration', 'code' => '020', 'price' => 3000],
+        ]);
 
         
     }
