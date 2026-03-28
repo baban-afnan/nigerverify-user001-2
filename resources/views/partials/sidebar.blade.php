@@ -37,6 +37,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link {{ Route::is('user.transactions') ? 'active' : '' }}" href="{{ route('user.transactions') }}">
+                <i class="mdi mdi-receipt-text-outline menu-icon"></i>
+                <span class="menu-title">My Transactions</span>
+            </a>
+        </li>
+
           <li class="nav-item">
             <a class="nav-link {{ Route::is('user.airtime') ? 'active' : '' }}" href="{{ route('user.airtime') }}">
                 <i class="mdi mdi-phone menu-icon"></i>

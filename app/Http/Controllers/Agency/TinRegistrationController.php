@@ -145,7 +145,7 @@ class TinRegistrationController extends Controller
                 'amount' => $servicePrice,
                 'service_type'    => 'TIN verification',
                 'service_description' => "TIN Validation - {$serviceField->field_name}",
-                'type' => 'approved',
+                'type' => 'debit',
                 'status' => 'Pending',
                 'service_type' => $serviceType,
                 'performed_by' => $performedBy,
@@ -185,8 +185,14 @@ class TinRegistrationController extends Controller
             $wallet->decrement('balance', $servicePrice);
 
             // Prepare API payload
-            $token = config('services.arewa.token');
-            $url = config('services.arewa.base_url') . '/tin/verify';
+            $token = config('services.arewa.token') ?: env('AREWA_API_TOKEN');
+            $baseUrl = config('services.arewa.base_url') ?: env('AREWA_BASE_URL');
+
+            if (empty($baseUrl) || empty($token)) {
+                throw new \RuntimeException('Arewa API credentials are not configured properly.');
+            }
+
+            $url = rtrim($baseUrl, '/') . '/tin/verify';
             $payload = [];
 
             if ($request->type === 'individual') {

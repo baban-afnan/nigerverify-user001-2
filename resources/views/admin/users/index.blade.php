@@ -135,7 +135,7 @@
 
             <div class="row g-4">
                 <!-- Total Users -->
-                <div class="col-md-4 col-12">
+                <div class="col-md-3 col-12">
                     <div class="card hover-shadow h-100 border-0">
                         <div class="card-body text-center">
                             <div class="mb-3">
@@ -151,7 +151,7 @@
                 </div>
 
                 <!-- Active Users -->
-                <div class="col-md-4 col-12">
+                <div class="col-md-3 col-12">
                     <div class="card hover-shadow h-100 border-0">
                         <div class="card-body text-center">
                             <div class="mb-3">
@@ -167,7 +167,7 @@
                 </div>
 
                 <!-- Inactive Users -->
-                <div class="col-md-4 col-12">
+                <div class="col-md-3 col-12">
                     <div class="card hover-shadow h-100 border-0">
                         <div class="card-body text-center">
                             <div class="mb-3">
@@ -178,6 +178,22 @@
                                 {{ $notActive }}
                             </h2>
                             <span class="badge bg-danger">Inactive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Wallet Balance -->
+                <div class="col-md-3 col-12">
+                    <div class="card hover-shadow h-100 border-0">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <i class="mdi mdi-wallet-outline text-warning mdi-36px"></i>
+                                <p class="fw-semibold mt-2 text-muted">Total Wallet Balance</p>
+                            </div>
+                            <h2 class="fw-bold text-dark">
+                                NGN {{ number_format($totalWalletBalance, 2) }}
+                            </h2>
+                            <span class="badge bg-warning text-dark">Wallets</span>
                         </div>
                     </div>
                 </div>

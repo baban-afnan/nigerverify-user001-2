@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Transactions History')
+@section('title', 'My Transactions')
 
 @push('styles')
     <style>
@@ -34,7 +34,7 @@
         .badge-success { background-color: #ecfdf5; color: #059669; }
         .badge-danger { background-color: #fef2f2; color: #dc2626; }
         .badge-warning { background-color: #fffbeb; color: #d97706; }
-        
+        .badge-info { background-color: #e0f2fe; color: #0369a1; }
         .search-container .input-group {
             background: #fff;
             border-radius: 10px;
@@ -48,7 +48,6 @@
         .search-container .btn {
             padding: 0.6rem 1.2rem;
         }
-        
         .pagination .page-link {
             border-radius: 8px !important;
             margin: 0 2px;
@@ -67,8 +66,8 @@
         <div class="col-12 mb-4">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h3 class="fw-bold text-dark mb-1">Transactions</h3>
-                    <p class="text-muted small mb-0">Manage and track all system transactions in one place.</p>
+                    <h3 class="fw-bold text-dark mb-1">My Transactions</h3>
+                    <p class="text-muted small mb-0">View your personal transaction history and receipts.</p>
                 </div>
                 <div class="d-none d-md-block">
                     <span class="badge bg-light text-dark border p-2">
@@ -78,7 +77,8 @@
             </div>
         </div>
 
-            <div class="row g-3 mb-4">
+        <div class="col-12 mb-4">
+            <div class="row g-3">
                 <div class="col-sm-6 col-xl-3">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-body text-center py-4">
@@ -116,34 +116,36 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <form method="GET" action="{{ url()->current() }}" class="search-container">
-                                <div class="input-group border">
-                                    <span class="input-group-text bg-white border-0">
-                                        <i class="bi bi-search text-muted"></i>
-                                    </span>
-                                    <input type="text" name="search" value="{{ request('search') }}"
-                                        class="form-control" placeholder="Search by reference, service, or status...">
-                                    <button class="btn btn-primary px-4" type="submit">Search</button>
-                                </div>
-                            </form>
-                            <div class="mt-3 text-muted small text-end">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-0">
+                    <div class="p-4 border-bottom">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <form method="GET" action="{{ route('user.transactions') }}" class="search-container">
+                                    <div class="input-group border">
+                                        <span class="input-group-text bg-white border-0">
+                                            <i class="bi bi-search text-muted"></i>
+                                        </span>
+                                        <input type="text" name="search" value="{{ request('search') }}"
+                                            class="form-control" placeholder="Search by reference, service, or status...">
+                                        <button class="btn btn-primary px-4" type="submit">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 text-md-end">
                                 @if ($transactions->count())
-                                    Showing <strong>{{ $transactions->firstItem() }}-{{ $transactions->lastItem() }}</strong> of <strong>{{ $transactions->total() }}</strong> transactions
+                                    <span class="text-muted small">
+                                        Showing <strong>{{ $transactions->firstItem() }}-{{ $transactions->lastItem() }}</strong> of <strong>{{ $transactions->total() }}</strong> records
+                                    </span>
                                 @endif
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            @include('common.message')
-
-            <div class="table-responsive">
+                    <div class="table-responsive">
                         @if ($transactions->count())
                             <table class="table table-hover mb-0">
                                 <thead>
@@ -152,8 +154,6 @@
                                         <th>Date & Time</th>
                                         <th>Reference No.</th>
                                         <th>Service</th>
-                                        <th>Type</th>
-                                        <th>Payer Details</th>
                                         <th>Amount</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-end pe-4">Action</th>
@@ -169,7 +169,7 @@
                                             </td>
                                             <td>
                                                 @if($data->referenceId)
-                                                    <a href="{{ route('admin.receipt', $data->referenceId) }}" class="text-primary fw-semibold text-decoration-none">
+                                                    <a href="{{ route('user.receipt', $data->referenceId) }}" class="text-primary fw-semibold text-decoration-none">
                                                         {{ $data->referenceId }}
                                                     </a>
                                                 @else
@@ -178,15 +178,7 @@
                                             </td>
                                             <td>
                                                 <div class="fw-medium text-dark">{{ $data->service_type }}</div>
-                                                <div class="text-muted small text-truncate" style="max-width: 150px;">{{ $data->service_description }}</div>
-                                            </td>
-                                            <td>
-                                                <span class="badge bg-secondary text-white rounded-pill py-2 px-3">{{ $data->type ? ucfirst($data->type) : 'N/A' }}</span>
-                                            </td>
-                                            <td>
-                                                <div class="fw-medium text-dark">{{ $data->payer_name }}</div>
-                                                <div class="text-muted small">{{ $data->payer_email }}</div>
-                                                <div class="text-muted smallest">{{ $data->payer_phone }}</div>
+                                                <div class="text-muted small text-truncate" style="max-width: 180px;">{{ $data->service_description }}</div>
                                             </td>
                                             <td>
                                                 <span class="fw-bold text-dark">&#8358;{{ number_format($data->amount, 2) }}</span>
@@ -205,7 +197,7 @@
                                             </td>
                                             <td class="text-end pe-4">
                                                 @if($data->referenceId)
-                                                    <a href="{{ route('admin.receipt', $data->referenceId) }}" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                    <a href="{{ route('user.receipt', $data->referenceId) }}" class="btn btn-sm btn-outline-primary rounded-pill">
                                                         <i class="bi bi-download me-1"></i> Receipt
                                                     </a>
                                                 @else
@@ -222,8 +214,8 @@
                             <div class="py-5 text-center">
                                 <img width="180" src="{{ asset('assets/images/no-transaction.gif') }}" alt="No data" class="mb-3 opacity-75">
                                 <h5 class="text-dark fw-bold">No Transactions Found</h5>
-                                <p class="text-muted">We couldn't find any transactions matching your criteria.</p>
-                                <a href="{{ url()->current() }}" class="btn btn-primary rounded-pill px-4">Clear Filters</a>
+                                <p class="text-muted">You have no transactions yet or your search did not match any records.</p>
+                                <a href="{{ route('user.transactions') }}" class="btn btn-primary rounded-pill px-4">Clear Filters</a>
                             </div>
                         @endif
                     </div>
@@ -235,13 +227,9 @@
                     @endif
                 </div>
             </div>
-            
-            <div class="mt-3 text-muted small p-2">
-                <i class="bi bi-info-circle me-1"></i> Tip: Click on the <strong>Reference No.</strong> to view and download the full transaction receipt.
-            </div>
         </div>
     </div>
 @endsection
 
-    @push('scripts')
-    @endpush
+@push('scripts')
+@endpush
